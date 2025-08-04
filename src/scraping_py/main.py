@@ -6,7 +6,7 @@ def process_category_page(url: str) -> None:
     pass
 
 
-if __name__ == "__main__":
+def main():
     domain: str = "https://books.toscrape.com/"
 
     url_seed: str = "https://books.toscrape.com/"
@@ -18,3 +18,7 @@ if __name__ == "__main__":
     categories = soup.find("ul", class_="nav-list").find("ul").find_all("li")
     for category in categories:
         url_frontier.append(f"{domain}{category.find('a').get('href')}")
+
+
+if __name__ == "__main__":
+    main()
