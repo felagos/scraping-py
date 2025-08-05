@@ -11,6 +11,7 @@ class BookInfo(TypedDict):
     title: str
     in_stock: bool
     price: float
+    stars: int
 
 class BookData(TypedDict):
     url: str
@@ -25,6 +26,10 @@ def process_category_page(url: str) -> BookData:
     books_data: BookData = {}
 
     soup = get_html_parser(url)
+    books_container = soup.find("section").find("ol", class_="row").find_all("li")
+
+    for book in books_container:
+        pass
     
     books_data
 
