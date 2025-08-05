@@ -15,8 +15,29 @@ dependencies = [
 [tool.poetry]
 packages = [{include = "scraping_py", from = "src"}]
 
+[tool.poetry.group.dev.dependencies]
+black = "^23.0.0"
+
 [tool.poetry.scripts]
 scrape = "scraping_py.main:main"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
