@@ -55,15 +55,15 @@ def process_category_page(url: str) -> BookData:
         price = book.find("p", class_="price_color").text.strip()
         title = book.find("h3").find("a").get("title")
 
-        books_info.append(
-            BookInfo(
-                url=f"{domain}{book_url}",
-                title=title,
-                in_stock=in_stock,
-                price=price,
-                stars=stars,
-            )
+        book_info = BookInfo(
+            url=f"{domain}{book_url}",
+            title=title,
+            in_stock=in_stock,
+            price=price,
+            stars=stars,
         )
+
+        books_info.append(book_info)
 
     books_data["url"] = url
     books_data["info"] = books_info
