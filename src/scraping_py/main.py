@@ -1,35 +1,23 @@
 import requests
 from bs4 import BeautifulSoup
-from typing import TypedDict, Dict
+from typing import Dict
 
 from scraping_py.politness import PolitenessPolicy
+from scraping_py.types import BookData, BookInfo
 
 domain: str = "https://books.toscrape.com/"
 url_seed: str = "https://books.toscrape.com/"
+
 urls_processed: Dict[str, bool] = {}
 books_processed: Dict[str, bool] = {}
 politeness = PolitenessPolicy(delay_per_domain=2.0)
-
-
-class BookInfo(TypedDict):
-    url: str
-    title: str
-    in_stock: bool
-    price: float
-    stars: int
-
-
-class BookData(TypedDict):
-    url: str
-    info: BookInfo
-
 
 star_mapping = {"One": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5}
 
 
 def get_html_parser(url: str) -> BeautifulSoup:
     politeness.wait_if_needed(url)
-    
+
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "html.parser")
     return soup
